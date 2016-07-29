@@ -11,6 +11,7 @@
         <module>Week1_CountingInversions</module>
         <module>Week2_QuickSort</module>
         <module>utils</module>
+        <module>w</module>
     </modules>
     <packaging>pom</packaging>
 
