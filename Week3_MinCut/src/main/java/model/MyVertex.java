@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,7 +12,10 @@ public class MyVertex {
 
     public MyVertex(Integer vertextNumber, Set<Integer> incidentVertices) {
         this.number = vertextNumber;
-        this.incidentVertices = incidentVertices;
+        if (incidentVertices == null)
+            this.incidentVertices = new HashSet<Integer>();
+        else
+            this.incidentVertices = incidentVertices;
     }
 
     public Integer getNumber() {
@@ -27,11 +31,8 @@ public class MyVertex {
         if (o == null) return false;
         if (!(o instanceof MyVertex)) return false;
         MyVertex otherVertex = (MyVertex) o;
-        if (number.equals(otherVertex.getNumber()) &&
+        return (number.equals(otherVertex.getNumber()) &&
                 incidentVertices.containsAll(otherVertex.getIncidentVertices()) &&
-                otherVertex.getIncidentVertices().containsAll(incidentVertices)) {
-            return true;
-        }
-        return false;
+                otherVertex.getIncidentVertices().containsAll(incidentVertices));
     }
 }
