@@ -1,6 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -8,12 +10,12 @@ import java.util.Set;
  */
 public class MyVertex {
     Integer number;
-    Set<Integer> incidentVertices;
+    List<Integer> incidentVertices;
 
-    public MyVertex(Integer vertextNumber, Set<Integer> incidentVertices) {
+    public MyVertex(Integer vertextNumber, List<Integer> incidentVertices) {
         this.number = vertextNumber;
         if (incidentVertices == null)
-            this.incidentVertices = new HashSet<Integer>();
+            this.incidentVertices = new ArrayList<Integer>();
         else
             this.incidentVertices = incidentVertices;
     }
@@ -22,7 +24,7 @@ public class MyVertex {
         return number;
     }
 
-    public Set<Integer> getIncidentVertices() {
+    public List<Integer> getIncidentVertices() {
         return incidentVertices;
     }
 
@@ -34,5 +36,10 @@ public class MyVertex {
         return (number.equals(otherVertex.getNumber()) &&
                 incidentVertices.containsAll(otherVertex.getIncidentVertices()) &&
                 otherVertex.getIncidentVertices().containsAll(incidentVertices));
+    }
+
+    public MyVertex copy() {
+        List<Integer> newIncidentVertices = new ArrayList<Integer>(incidentVertices);
+        return new MyVertex(number.intValue(), newIncidentVertices);
     }
 }

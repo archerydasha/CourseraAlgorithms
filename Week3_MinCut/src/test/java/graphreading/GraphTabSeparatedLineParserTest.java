@@ -1,9 +1,11 @@
 package graphreading;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import model.MyVertex;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import static org.junit.Assert.*;
@@ -16,14 +18,14 @@ public class GraphTabSeparatedLineParserTest {
     @Test
     public void testVertexCreation1(){
         String input = "2\t1\t3\t4";
-        MyVertex expectedResult = new MyVertex(2, Sets.newHashSet(1,3,4));
+        MyVertex expectedResult = new MyVertex(2, Lists.newArrayList(1,3,4));
         assertEquals(expectedResult, new GraphTabSeparatedLineParser().parseLine(input));
     }
 
     @Test
     public void testVertexCreation2(){
         String input = "5";
-        MyVertex expectedResult = new MyVertex(5, new HashSet<Integer>());
+        MyVertex expectedResult = new MyVertex(5, new ArrayList<Integer>());
         assertEquals(expectedResult, new GraphTabSeparatedLineParser().parseLine(input));
     }
 

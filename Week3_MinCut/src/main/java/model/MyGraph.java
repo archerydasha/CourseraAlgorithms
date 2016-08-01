@@ -10,18 +10,34 @@ import java.util.List;
  * Created by Dasha on 7/29/2016.
  */
 public class MyGraph {
+    long numberOfEdges;
     List<MyVertex> vertices;
 
-    public MyGraph(){
+    public MyGraph() {
         this(null);
     }
 
     public MyGraph(List<MyVertex> vertices) {
-        if (vertices == null) {
-            this.vertices = new ArrayList<MyVertex>();
-        } else {
-            this.vertices = vertices;
+        numberOfEdges = 0l;
+        this.vertices = new ArrayList<MyVertex>();
+        if (vertices != null) {
+            for (MyVertex v : vertices) {
+                addVertexAndCountEdges(v);
+            }
         }
+    }
+
+    private void addVertexAndCountEdges(MyVertex v) {
+        vertices.add(v);
+        numberOfEdges += v.getIncidentVertices().size();
+    }
+
+    public void reduceNumberOfEdgesByOne(){
+        numberOfEdges--;
+    }
+
+    public long getNumberOfEdges() {
+        return numberOfEdges;
     }
 
     public MyVertex getVertexByNumber(final Integer vertexNumber) {
@@ -41,15 +57,23 @@ public class MyGraph {
         if (getVertexByNumber(vertex.getNumber()) != null) {
             throw new GraphCreationException("Trying to add vertex " + vertex.getNumber() + " to the graph that already has this vertex!");
         }
-        vertices.add(vertex);
+        addVertexAndCountEdges(vertex);
     }
 
     @Override
-    public boolean equals(Object o){
-        if(o== null) return false;
-        if(!(o instanceof MyGraph)) return false;
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (!(o instanceof MyGraph)) return false;
         MyGraph otherGraph = (MyGraph) o;
         return (otherGraph.getVertices().containsAll(vertices) &&
                 vertices.containsAll(otherGraph.getVertices()));
+    }
+
+    public MyGraph copy() {
+        List<MyVertex> newVertices = new ArrayList<MyVertex>();
+        for (MyVertex v : vertices) {
+            newVertices.add(v.copy());
+        }
+        return new MyGraph(newVertices);
     }
 }
