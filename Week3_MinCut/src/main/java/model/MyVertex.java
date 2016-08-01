@@ -38,7 +38,8 @@ public class MyVertex {
                 otherVertex.getIncidentVertices().containsAll(incidentVertices));
     }
 
-    public MyVertex copy() {
+    @Override
+    public MyVertex clone() {
         List<Integer> newIncidentVertices = new ArrayList<Integer>(incidentVertices);
         return new MyVertex(number.intValue(), newIncidentVertices);
     }

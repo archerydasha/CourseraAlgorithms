@@ -12,58 +12,33 @@ import static org.junit.Assert.*;
 /**
  * Created by arche on 7/31/2016.
  */
-public class MinCutTestFromForum {
-    private GraphFileReader fileReader = new GraphFileReader(new GraphTabSeparatedLineParser());
+public class MinCutTestFromForum  extends MinCutAlgorithmTest{
+
     @Test
     public void testBigGraph1() throws IOException {
-        InputStream input = getClass().getResourceAsStream("big_graph_1.txt");
-        MyGraph bigGraph = fileReader.readGraphFromFile(input);
-        int expectedResult = 2;
-        int actualResult = MinCutAlgorithm.findMinCut(bigGraph);
-        assertEquals(expectedResult, actualResult);
+        testMinCut("big_graph_1.txt", 2);
     }
     @Test
     public void testBigGraph1Permuted() throws IOException {
-        InputStream input = getClass().getResourceAsStream("big_graph_1_permuted.txt");
-        MyGraph bigGraph = fileReader.readGraphFromFile(input);
-        int expectedResult = 2;
-        int actualResult = MinCutAlgorithm.findMinCut(bigGraph);
-        assertEquals(expectedResult, actualResult);
+        testMinCut("big_graph_1_permuted.txt", 2);
     }
 
     @Test
     public void testBigGraph2() throws IOException {
-        InputStream input = getClass().getResourceAsStream("big_graph_2.txt");
-        MyGraph bigGraph = fileReader.readGraphFromFile(input);
-        int expectedResult = 1;
-        int actualResult = MinCutAlgorithm.findMinCut(bigGraph);
-        assertEquals(expectedResult, actualResult);
+        testMinCut("big_graph_2.txt", 1);
     }
     @Test
     public void testBigGraph2Permuted() throws IOException {
-        InputStream input = getClass().getResourceAsStream("big_graph_2_permuted.txt");
-        MyGraph bigGraph = fileReader.readGraphFromFile(input);
-        int expectedResult = 1;
-        int actualResult = MinCutAlgorithm.findMinCut(bigGraph);
-        assertEquals(expectedResult, actualResult);
+        testMinCut("big_graph_2_permuted.txt", 1);
     }
 
     @Test
     public void testBigGraph3() throws IOException {
-        InputStream input = getClass().getResourceAsStream("big_graph_3.txt");
-        MyGraph bigGraph = fileReader.readGraphFromFile(input);
-        int expectedResult = 3;
-        int actualResult = MinCutAlgorithm.findMinCut(bigGraph);
-        assertEquals(expectedResult, actualResult);
+        testMinCut("big_graph_3.txt", 3);
     }
 
     @Test
     public void testBigGraph4() throws IOException {
-        InputStream input = getClass().getResourceAsStream("big_graph_4.txt");
-        MyGraph bigGraph = fileReader.readGraphFromFile(input);
-        int expectedResult = 2;
-        int actualResult = MinCutAlgorithm.findMinCut(bigGraph);
-        assertEquals(expectedResult, actualResult);
+        testMinCut("big_graph_4.txt", 2);
     }
-
 }

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Dasha on 7/29/2016.
  */
-public class MyGraph {
+public class MyGraph implements Cloneable {
     long numberOfEdges;
     List<MyVertex> vertices;
 
@@ -69,10 +69,11 @@ public class MyGraph {
                 vertices.containsAll(otherGraph.getVertices()));
     }
 
-    public MyGraph copy() {
+    @Override
+    public MyGraph clone() {
         List<MyVertex> newVertices = new ArrayList<MyVertex>();
         for (MyVertex v : vertices) {
-            newVertices.add(v.copy());
+            newVertices.add(v.clone());
         }
         return new MyGraph(newVertices);
     }

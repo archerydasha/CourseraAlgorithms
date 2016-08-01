@@ -15,10 +15,10 @@ public class MinCutAlgorithm {
 
     public static int findMinCut(MyGraph graph) {
         int graphSize = graph.getVertices().size();
-        int numberOfTrials = (int)Math.pow(graphSize, 2);// Math.round(Math.pow(graphSize, 2) * calculateNumberOfEdges(graph));
+        int numberOfTrials = (int) Math.pow(graphSize, 2);// Math.round(Math.pow(graphSize, 2) * graph.getNumberOfEdges());
         int minCutSize = Integer.MAX_VALUE;
         for (int i = 0; i < numberOfTrials; i++) {
-            int cutSize = findRandomCut(graph.copy());
+            int cutSize = findRandomCut(graph.clone());
             if (cutSize < minCutSize) {
                 minCutSize = cutSize;
             }
@@ -29,27 +29,26 @@ public class MinCutAlgorithm {
     public static int findRandomCut(MyGraph graph) {
         while (graph.getVertices().size() > 2) {
             MyEdge edge = findRandomEdge(graph);
-            ContractEdge(edge, graph);
+            contractEdge(edge, graph);
         }
-        ;
         return graph.getVertices().get(0).getIncidentVertices().size();
     }
 
     private static MyEdge findRandomEdge(MyGraph graph) {
-        //long numberOfEdges = calculateNumberOfEdges(graph);
         long numberOfEdges = graph.getNumberOfEdges();
         long edgeNumber = Math.round(Math.random() * (double) numberOfEdges);
         if (edgeNumber == 0) {
+            //rounded down too much
             edgeNumber = 1;
         }
         MyVertex tailVertex = null;
         for (MyVertex vertex : graph.getVertices()) {
-            int incidendVerticesCount = vertex.getIncidentVertices().size();
-            if (incidendVerticesCount >= edgeNumber) {
+            int incidentVerticesCount = vertex.getIncidentVertices().size();
+            if (incidentVerticesCount >= edgeNumber) {
                 tailVertex = vertex;
                 break;
             }
-            edgeNumber -= incidendVerticesCount;
+            edgeNumber -= incidentVerticesCount;
         }
         Integer tail = tailVertex.getNumber();
         Integer head = tailVertex.getIncidentVertices().get((int) edgeNumber - 1);
@@ -57,15 +56,7 @@ public class MinCutAlgorithm {
         return new MyEdge(tail, head);
     }
 
-    private static long calculateNumberOfEdges(MyGraph graph) {
-        long numberOfEdges = 0l;
-        for (MyVertex v : graph.getVertices()) {
-            numberOfEdges += v.getIncidentVertices().size();
-        }
-        return numberOfEdges;
-    }
-
-    public static void ContractEdge(MyEdge edge, MyGraph graph) {
+    public static void contractEdge(MyEdge edge, MyGraph graph) {
         MyVertex tailVertex = graph.getVertexByNumber(edge.getTail());
         MyVertex headVertex = graph.getVertexByNumber(edge.getHead());
         List<Integer> incidentVertices = tailVertex.getIncidentVertices();

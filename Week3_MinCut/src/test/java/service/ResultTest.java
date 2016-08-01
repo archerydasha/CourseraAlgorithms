@@ -13,15 +13,9 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by arche on 8/1/2016.
  */
-public class ResultTest {
-    private GraphFileReader fileReader = new GraphFileReader(new GraphTabSeparatedLineParser());
-
-    @Test
+public class ResultTest extends MinCutAlgorithmTest{
+   @Test
     public void testResult() throws IOException {
-        InputStream input = getClass().getResourceAsStream("kargerMinCut.txt");
-        MyGraph bigGraph = fileReader.readGraphFromFile(input);
-        int expectedResult = 17;
-        int actualResult = MinCutAlgorithm.findMinCut(bigGraph);
-        assertEquals(expectedResult, actualResult);
+        testMinCut("kargerMinCut.txt", 17);
     }
 }
