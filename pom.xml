@@ -12,6 +12,10 @@
         <module>Week2_QuickSort</module>
         <module>Week3_MinCut</module>
         <module>utils</module>
+        <module>Week4_SCC</module>
+        <module>Week5_DijkstraAlgorithm</module>
+        <module>Week6_2Sum</module>
+        <module>Week6_Median</module>
     </modules>
     <packaging>pom</packaging>
 
