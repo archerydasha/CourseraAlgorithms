@@ -55,7 +55,7 @@ public class SccFindingTest {
     public void testMain() throws IOException {
         System.out.println();
         System.out.println("main task");
-        long[] expectedSizes = {3l, 3l, 3l, 0l, 0l};
+        long[] expectedSizes = {434821, 968, 459, 313, 211};
         testGraph("SCC.txt", expectedSizes);
     }
 

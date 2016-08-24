@@ -20,7 +20,7 @@ public class StronglyConnectedComponentAlgorithm {
 
     public static List<StronglyConnectedComponent> computeStronglyConnectedComponents(TheGraph graph) {
         //First loop on G-rev
-        long finishingTime = 0l;
+
         StronglyConnectedComponentAlgorithm.finishingTime = 0l;
 
         List<TheVertex> vertices = graph.getVertices();
@@ -29,7 +29,7 @@ public class StronglyConnectedComponentAlgorithm {
 
         for (TheVertex vertex : vertices) {
             if (!vertex.isExplored()) {
-                Reverse_DFS(vertex, finishingTime);
+                Reverse_DFS(vertex);
             }
         }
 
@@ -70,12 +70,12 @@ public class StronglyConnectedComponentAlgorithm {
         });
     }
 
-    private static void Reverse_DFS(TheVertex vertex, Long finishingTime) {
+    private static void Reverse_DFS(TheVertex vertex) {
         vertex.setExplored(true);
         for (TheEdge edge : vertex.getInEdges()) {
             TheVertex nextVertex = edge.getTail();
             if (!nextVertex.isExplored()) {
-                Reverse_DFS(nextVertex, finishingTime);
+                Reverse_DFS(nextVertex);
             }
         }
         vertex.setFinishingTime(StronglyConnectedComponentAlgorithm.finishingTime);
