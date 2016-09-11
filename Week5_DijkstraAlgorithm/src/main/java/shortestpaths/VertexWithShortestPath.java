@@ -5,8 +5,8 @@ import java.util.List;
 /**
  * Created by Dasha on 8/24/2016.
  */
-public class VertexWithShortestPath extends MyVertex {
-    MyVertex delegate;
+public class VertexWithShortestPath {
+    private MyVertex delegate;
     private long shortestPath;
 
     public VertexWithShortestPath(MyVertex v, long i) {
@@ -14,12 +14,10 @@ public class VertexWithShortestPath extends MyVertex {
         shortestPath = i;
     }
 
-    @Override
     public List<MyEdge> getOutEdges() {
         return delegate.getOutEdges();
     }
 
-    @Override
     public int getNumber() {
         return delegate.getNumber();
     }
@@ -30,5 +28,13 @@ public class VertexWithShortestPath extends MyVertex {
 
     public void setShortestPath(long shortestPath) {
         this.shortestPath = shortestPath;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o == null) return false;
+        if (!(o instanceof VertexWithShortestPath)) return false;
+        VertexWithShortestPath otherVertex = (VertexWithShortestPath)o;
+        return delegate.equals(otherVertex.delegate);
     }
 }

@@ -12,7 +12,10 @@ public class MyVertex {
 
     public MyVertex(int number, List<MyEdge> outEdges) {
         this.number = number;
-        this.outEdges = outEdges;
+        if(outEdges == null)
+            this.outEdges = new ArrayList<>();
+        else
+            this.outEdges = outEdges;
     }
 
     public List<MyEdge> getOutEdges() {
@@ -21,5 +24,14 @@ public class MyVertex {
 
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (!(o instanceof MyVertex)) return false;
+        MyVertex otherVertex = (MyVertex) o;
+        return number == otherVertex.getNumber() && outEdges.containsAll(otherVertex.getOutEdges()) &&
+                otherVertex.getOutEdges().containsAll(outEdges);
     }
 }

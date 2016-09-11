@@ -15,7 +15,7 @@ public class DijkstraShortestPathsAlgorithm {
         PriorityQueue<VertexWithShortestPath> vertexHeap = new PriorityQueue<>(new Comparator<VertexWithShortestPath>() {
             @Override
             public int compare(VertexWithShortestPath o1, VertexWithShortestPath o2) {
-                if(o1.getShortestPath() == o2.getShortestPath()) return 0;
+                if (o1.getShortestPath() == o2.getShortestPath()) return 0;
                 return (o1.getShortestPath() - o2.getShortestPath()) > 0 ? 1 : -1;
             }
         });
@@ -32,7 +32,7 @@ public class DijkstraShortestPathsAlgorithm {
             }
         }
 
-        if(lastAddedVertex == null){
+        if (lastAddedVertex == null) {
             throw new CorruptedInputException("The graph does not have a source vertex specified");
         }
         while (vertexHeap.size() > 0) {
@@ -45,18 +45,14 @@ public class DijkstraShortestPathsAlgorithm {
                     }
                 }, null);
 
-                if (affectedVertex == null) {
-                    throw new CorruptedInputException("Graph contains zombie edge " + lastAddedVertex.getNumber() +
-                                "-" + edge.getHead() + ". The head of edge does not exist");
-                }
-
-                long newShortestPath = lastAddedVertex.getShortestPath() + edge.getLength();
-                if (newShortestPath < affectedVertex.getShortestPath()) {
-                    //ToDo - check, maybe PriorityQueue can maintain it's structure
-                    //if I just change the shortest path of the vertex
-                    vertexHeap.remove(affectedVertex);
-                    affectedVertex.setShortestPath(newShortestPath);
-                    vertexHeap.add(affectedVertex);
+                if (affectedVertex != null) {
+                    //if it is null - it is probably already gone from the heap
+                    long newShortestPath = lastAddedVertex.getShortestPath() + edge.getLength();
+                    if (newShortestPath < affectedVertex.getShortestPath()) {
+                        vertexHeap.remove(affectedVertex);
+                        affectedVertex.setShortestPath(newShortestPath);
+                        vertexHeap.add(affectedVertex);
+                    }
                 }
             }
             //actually finding new candidate
@@ -67,19 +63,4 @@ public class DijkstraShortestPathsAlgorithm {
         return computedPaths;
     }
 
-    public static String Week5Assignment(MyGraph graph) throws CorruptedInputException {
-        Map<Integer, Long> shortestPaths = computeShortestPaths(graph, 0);
-        String result = "";
-        result += shortestPaths.get(7) + ",";
-        result += shortestPaths.get(37) + ",";
-        result += shortestPaths.get(59) + ",";
-        result += shortestPaths.get(82) + ",";
-        result += shortestPaths.get(99) + ",";
-        result += shortestPaths.get(115) + ",";
-        result += shortestPaths.get(133) + ",";
-        result += shortestPaths.get(165) + ",";
-        result += shortestPaths.get(188) + ",";
-        result += shortestPaths.get(197);
-        return result;
-    }
 }

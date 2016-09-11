@@ -22,4 +22,12 @@ public class MyEdge {
         this.head = head;
         this.length = length;
     }
+
+    @Override
+    public boolean equals(Object o){
+        if (o == null) return false;
+        if ( ! (o instanceof  MyEdge)) return false;
+        MyEdge otherEdge = (MyEdge) o;
+        return head == otherEdge.getHead() && length == otherEdge.getLength();
+    }
 }

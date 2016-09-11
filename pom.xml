@@ -16,6 +16,7 @@
         <module>Week5_DijkstraAlgorithm</module>
         <module>Week6_2Sum</module>
         <module>Week6_Median</module>
+        <module>Simple_Sorting_Algorithms</module>
     </modules>
     <packaging>pom</packaging>
 
