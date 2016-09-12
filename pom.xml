@@ -17,6 +17,8 @@
         <module>Week6_2Sum</module>
         <module>Week6_Median</module>
         <module>Simple_Sorting_Algorithms</module>
+        <module>Week7_Part2_1_JobScheduling</module>
+        <module>Week7_Part2_1_Prims_Algorithm</module>
     </modules>
     <packaging>pom</packaging>
 
